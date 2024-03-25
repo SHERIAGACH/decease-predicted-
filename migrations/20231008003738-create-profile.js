@@ -31,6 +31,12 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
+      poids: {
+        type: Sequelize.DOUBLE
+      },
+      age: {
+        type: Sequelize.INTEGER
+      },
       telephone: {
         type: Sequelize.INTEGER
       },
