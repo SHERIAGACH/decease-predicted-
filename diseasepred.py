@@ -174,20 +174,23 @@ input_data =(sys.argv[1])
 # input_data = ["belly_pain","diarrhoea","depression","internal_itching","sweating"]
 
 def creer_array_depuis_virgules(chaine):
+  
   """
+  
   Fonction pour créer un array à partir d'une chaîne séparée par des virgules.
-
-  Args:
-      chaine: La chaîne à convertir en array.
-
-  Returns:
-      Une liste contenant des arrays.
+  Args: chaine: La chaîne à convertir en array.
+  Returns: Une liste contenant des arrays.
+  
   """
+  
   elements = chaine.split(",")
   liste_array = []
   for element in elements:
+    
     # Supprime les espaces avant et après chaque élément
+    
     element = element.strip()
+    
     # Si l'élément est vide, on ignore
     if not element:
       continue
@@ -198,11 +201,14 @@ def creer_array_depuis_virgules(chaine):
   return liste_array
 
 # Exemple d'utilisation
+
 chaine =(input_data)
 liste_array = creer_array_depuis_virgules(chaine)
+
 # symptoms = ["belly_pain","diarrhoea","depression","internal_itching","sweating"]
 # print(f"With the sysmptoms{symptoms} ,the prediction gives: ",my_pred(symptoms))
-print(f"Decision : It might be {my_pred(liste_array)}")
+
+print(my_pred(liste_array))
 
 #save the model
 

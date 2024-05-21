@@ -10,13 +10,27 @@ const { exec } = require('child_process');
 server.use(bodyParser.urlencoded({ extended:true }));
 server.use(jsonParser);
 
+// const allowedOrigins = process.env.NODE_ENV === 'development'
+//   ? ['http://192.168.1.174:19000'] // Replace with your React Native app's development port
+//   : ['https://localhost.com']; // Replace with your production domain
+
+// server.use(cors({
+//   origin: allowedOrigins,
+// }));
 const corsoptions = {
-    origin : '*',
-    Credential : true,
-    // control-allow-Credential : true,
-   optionsuccesstatus:200,
+  origin : '*',
+  Credential : true,
+ optionsuccesstatus:200,
 }
 server.use(cors(corsoptions))
+
+server.use((req, res, next) => {
+   res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'); // Allowed methods
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Allowed headers
+  next();
+});
+
 
 
 // Config route
@@ -26,7 +40,6 @@ server.get('/', function(req, res){
     res.setHeader('FormData','text/html');
     res.status(200).send('</h1> Bonjour  </h1>');
 });
-
 
 
 // test prediction desease
@@ -46,17 +59,17 @@ server.post('/predict', (req, res) => {
     exec(command, (error, stdout, stderr) => {
       if (error) {
         console.error('Prediction error:', error);
-        return res.status(500).json({ error: 'Internal server error' });
+        return res.status(500).json({ error: error });
       }
   
       // const predictions = JSON.parse(stdout);
-       console.log(stdout)
-       res.json({ "success":"true" });
+     
+       res.json({stdout });
     });
   });
-
+  const port = process.env.PORT || 5000; 
 server.use('/api', apiRouter);
 server.use(express.static('public'))
-server.listen(5000, function(){
+server.listen(port, function(){
     console.log('server en écoute')
 })
