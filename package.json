@@ -6,8 +6,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js",
-    "build": "CI=false npm run build"
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
@@ -23,7 +22,6 @@
     "cors": "^2.8.5",
     "dialogflow": "^1.2.0",
     "dialogflow-fulfillment": "^0.4.1",
-    "dotenv": "^16.4.5",
     "express": "^4.18.2",
     "express-fileupload": "^1.4.1",
     "jsonwebtoken": "^9.0.2",
@@ -37,6 +35,6 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.0.3"
   }
 }
