@@ -1,3 +1,4 @@
+require('dotenv').config()
 var express = require('express');
 var server = express()
 var bodyParser = require('body-parser')
@@ -6,17 +7,13 @@ var apiRouter = require('./apiRoute').router;
 var cors = require('cors');
 const path = require('path')
 const { exec } = require('child_process');
-// create application/x-www-form-urlencoded parser
+
+const db = require("./models");
+db.sequelize.sync();
 server.use(bodyParser.urlencoded({ extended:true }));
 server.use(jsonParser);
 
-// const allowedOrigins = process.env.NODE_ENV === 'development'
-//   ? ['http://192.168.1.174:19000'] // Replace with your React Native app's development port
-//   : ['https://localhost.com']; // Replace with your production domain
 
-// server.use(cors({
-//   origin: allowedOrigins,
-// }));
 const corsoptions = {
   origin : '*',
   Credential : true,
@@ -67,7 +64,7 @@ server.post('/predict', (req, res) => {
        res.json({stdout });
     });
   });
-  const port = process.env.PORT || 5000; 
+const port = process.env.PORT || 5000; 
 server.use('/api', apiRouter);
 server.use(express.static('public'))
 server.listen(port, function(){
